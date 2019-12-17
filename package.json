@@ -6,6 +6,9 @@
   "repository": "https://github.com/cunhamuril/Blog_NodeMongoReact-backend.git",
   "author": "Murilo Cunha",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon src"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",

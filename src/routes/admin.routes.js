@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
  */
 router.get('/categories', Category.findAll)
 router.get('/categories/:id', Category.findOne)
-router.post('/categories/new', Category.save)
+router.post('/categories', Category.save)
 router.put('/categories/:id', Category.update)
 router.delete('/categories/:id', Category.remove)
 

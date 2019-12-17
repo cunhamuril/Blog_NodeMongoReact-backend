@@ -9,12 +9,13 @@ const adminRoutes = require('./routes/admin.routes')
 
 const app = express()
 
-const { DB_URL, PORT } = process.env
+const { DB_URL, PORT, CORS_ORIGIN } = process.env
 
 /**
  * Config 
  */
-
+// Cors
+app.use(cors())
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -38,9 +39,6 @@ app.use('/admin', adminRoutes)
 /**
  * Outros
  */
-// Cors
-app.use(cors())
 
 const timeNow = new Date()
-
 app.listen(PORT, () => console.log(`${timeNow}\nServer is running on port ${PORT}`))
