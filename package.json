@@ -1,0 +1,9 @@
+{
+  "name": "Blog",
+  "version": "1.0.0",
+  "description": "exercitando conhecimento",
+  "main": "index.js",
+  "repository": "https://github.com/cunhamuril/Blog_NodeMongoReact-backend.git",
+  "author": "Murilo Cunha",
+  "license": "MIT"
+}
