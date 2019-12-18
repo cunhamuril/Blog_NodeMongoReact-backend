@@ -44,6 +44,7 @@ const Post = mongoose.Schema({
   }
 })
 
+// função que vai definir a URL da imagem
 // esta função não poderá ser escrita em formato arrow function
 Post.virtual('thumbnail_url').get(function () {
   const url = `${HOST}:${PORT}`

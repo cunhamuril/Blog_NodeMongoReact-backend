@@ -35,7 +35,12 @@ module.exports = {
   findAll: (req, res) => {
     const { page = 1 } = req.query
 
-    PostModel.paginate({}, { page, limit: 3, sort: { date: 'desc' } })
+    PostModel.paginate({}, {
+      page,
+      limit: 3,
+      populate: 'category',
+      sort: { date: 'desc' },
+    })
       .then(posts => res.send(posts))
       .catch(err => res.status(500).send(err))
   },
