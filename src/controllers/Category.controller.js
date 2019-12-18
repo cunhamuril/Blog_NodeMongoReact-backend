@@ -23,8 +23,14 @@ module.exports = {
 
   findAll: (req, res) => {
     // find com ordenação pela data, do mais novo para o mais antigo
-    Category.find().sort({ createdAt: 'desc' })
-      .then(category => res.send(category))
+    // Category.find().sort({ createdAt: 'desc' })
+    //   .then(category => res.send(category))
+    //   .catch(err => res.status(500).send({ msg: err }))
+
+    const { page = 1 } = req.query
+
+    Category.paginate({}, { page, limit: 4, sort: { createdAt: 'desc' } })
+      .then(categories => res.send(categories))
       .catch(err => res.status(500).send({ msg: err }))
   },
 
