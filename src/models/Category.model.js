@@ -9,6 +9,8 @@ const Category = mongoose.Schema({
   slug: {
     type: String,
     required: true,
+    lowercase: true,
+    trim: true
   },
 }, {
   timestamps: true // data de criação e data de modificação

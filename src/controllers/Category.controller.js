@@ -1,12 +1,12 @@
-const Category = require('../models/Category.model')
+const CategoryModel = require('../models/Category.model')
 
-const { existsOrError, notExistsOrError } = require('./validation')
+const { existsOrError } = require('./validation')
 
 module.exports = {
   save: (req, res) => {
     const { name, slug } = req.body
 
-    const category = new Category({ name, slug })
+    const category = new CategoryModel({ name, slug })
 
     // Validação
     try {
@@ -18,24 +18,19 @@ module.exports = {
 
     category.save()
       .then(() => res.send({ msg: "Categoria adicionada com sucesso!" }))
-      .catch(err => res.status(500).send({ error: err }))
+      .catch(err => res.status(500).send(err))
   },
 
   findAll: (req, res) => {
-    // find com ordenação pela data, do mais novo para o mais antigo
-    // Category.find().sort({ createdAt: 'desc' })
-    //   .then(category => res.send(category))
-    //   .catch(err => res.status(500).send({ msg: err }))
-
     const { page = 1 } = req.query
 
-    Category.paginate({}, { page, limit: 4, sort: { createdAt: 'desc' } })
+    CategoryModel.paginate({}, { page, limit: 10, sort: { createdAt: 'desc' } })
       .then(categories => res.send(categories))
-      .catch(err => res.status(500).send({ msg: err }))
+      .catch(err => res.status(500).send(err))
   },
 
   findOne: (req, res) => {
-    Category.findOne({ _id: req.params.id })
+    CategoryModel.findOne({ _id: req.params.id })
       .then(category => res.send(category))
       .catch(err => res.status(400).send({ msg: err }))
   },
@@ -50,22 +45,22 @@ module.exports = {
       return res.status(400).send(msg)
     }
 
-    Category.findOne({ _id: req.params.id })
+    CategoryModel.findOne({ _id: req.params.id })
       .then(category => {
         category.name = name
         category.slug = slug
 
         category.save()
           .then(() => res.send({ msg: "Categoria editada com sucesso!" }))
-          .catch(err => res.send({ error: err }))
+          .catch(err => res.status(500).send(err))
       })
   },
 
   remove: (req, res) => {
     const { id } = req.params
 
-    Category.deleteOne({ _id: id })
+    CategoryModel.deleteOne({ _id: id })
       .then(() => res.send({ msg: "Categoria deletada com sucesso! " }))
-      .catch(err => res.status(500).send({ error: err }))
+      .catch(err => res.status(500).send(err))
   }
 }
