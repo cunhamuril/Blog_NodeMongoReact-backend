@@ -21,10 +21,16 @@ module.exports = {
       .catch(err => res.status(500).send(err))
   },
 
-  findAll: (req, res) => {
+  index: (req, res) => {
     const { page = 1 } = req.query
 
     CategoryModel.paginate({}, { page, limit: 10, sort: { createdAt: 'desc' } })
+      .then(categories => res.send(categories))
+      .catch(err => res.status(500).send(err))
+  },
+
+  findAll: (req, res) => {
+    CategoryModel.find()
       .then(categories => res.send(categories))
       .catch(err => res.status(500).send(err))
   },

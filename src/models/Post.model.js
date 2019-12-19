@@ -7,7 +7,6 @@ const { HOST, PORT } = process.env
 const Post = mongoose.Schema({
   thumbnail: {
     type: String,
-    required: false
   },
   title: {
     type: String,

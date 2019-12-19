@@ -11,7 +11,8 @@ const upload = multer(uploadConfig)
 /**
  * Rotas de categorias
  */
-router.get('/categories', CategoryController.findAll)
+router.get('/categories', CategoryController.index)
+router.get('/categories/all', CategoryController.findAll)
 router.get('/categories/:id', CategoryController.findOne)
 router.post('/categories', CategoryController.save)
 router.put('/categories/:id', CategoryController.update)

@@ -1,11 +1,14 @@
+require('dotenv/config')
 const PostModel = require('../models/Post.model')
 
 const { existsOrError } = require('./validation')
 
+const { HOST, PORT } = process.env
+
 module.exports = {
   save: (req, res) => {
     // condição que vai verificar se tem file ou não
-    const filename = req.file ? req.file.filename : null
+    const filename = req.file ? req.file.filename : "default-image.png"
     const { title, slug, description, content, category } = req.body
 
     const post = new PostModel({
@@ -37,7 +40,7 @@ module.exports = {
 
     PostModel.paginate({}, {
       page,
-      limit: 3,
+      limit: 5,
       populate: 'category',
       sort: { date: 'desc' },
     })
@@ -50,9 +53,10 @@ module.exports = {
       .then(category => {
         // Const que armazena valor do conteúdo convertido de binário em String
         const content = category.content.toString()
+        const thumbnail_url = `${HOST}:${PORT}/files/${category._doc.thumbnail}`
 
         // Res envia dados de category e content convertido
-        res.send({ ...category._doc, content })
+        res.send({ ...category._doc, content, thumbnail_url })
       })
       .catch(err => res.status(500).send(err))
   },
