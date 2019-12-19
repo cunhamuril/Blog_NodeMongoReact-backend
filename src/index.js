@@ -7,6 +7,7 @@ const cors = require('cors')
 const path = require('path')
 
 const adminRoutes = require('./routes/admin.routes')
+const mainRoutes = require('./routes/main.routes')
 
 const app = express()
 
@@ -35,6 +36,8 @@ app.use(cors())
 /**
  * Rotas
  */
+app.use(mainRoutes)
+
 // responsável por carregar o caminho das imagens
 app.use('/files', express.static(path.resolve(__dirname, '..', 'uploads')))
 
