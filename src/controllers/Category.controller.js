@@ -1,6 +1,7 @@
 const CategoryModel = require('../models/Category.model')
+const PostModel = require('../models/Post.model')
 
-const { existsOrError } = require('./validation')
+const { existsOrError, notExistsOrError } = require('./validation')
 
 module.exports = {
   save: (req, res) => {
@@ -62,11 +63,17 @@ module.exports = {
       })
   },
 
-  remove: (req, res) => {
+  remove: async (req, res) => {
     const { id } = req.params
 
-    CategoryModel.deleteOne({ _id: id })
-      .then(() => res.send({ msg: "Categoria deletada com sucesso! " }))
-      .catch(err => res.status(500).send(err))
+    const post = await PostModel.find({ category: id })
+
+    if (post.length > 0) {
+      return res.status(400).send({ msg: "Categoria não pode ser excluída: tem postagem!" })
+    } else {
+      CategoryModel.deleteOne({ _id: id })
+        .then(() => res.send({ msg: "Categoria deletada com sucesso! " }))
+        .catch(err => res.status(500).send(err))
+    }
   }
 }
