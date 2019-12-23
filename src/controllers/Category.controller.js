@@ -69,7 +69,7 @@ module.exports = {
     const post = await PostModel.find({ category: id })
 
     if (post.length > 0) {
-      return res.status(400).send({ msg: "Categoria não pode ser excluída: tem postagem!" })
+      return res.status(400).send({ msg: "Erro: categoria tem postagem!" })
     } else {
       CategoryModel.deleteOne({ _id: id })
         .then(() => res.send({ msg: "Categoria deletada com sucesso! " }))

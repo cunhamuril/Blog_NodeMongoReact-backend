@@ -10,7 +10,29 @@ const { HOST, PORT } = process.env
 const router = express.Router()
 
 /**
- * Rotas de postagens
+ * Pesquisar posts
+ */
+router.get('/posts/search', (req, res) => {
+  const { value } = req.query
+
+  if (!value) {
+    return res.status(400).send({ msg: "Informe um valor para busca" })
+  } else {
+    const query = { title: new RegExp(value, 'i') }
+
+    PostModel.find(query)
+      .then(post => {
+        post.length > 0 ? res.send(post) : res.status(404).send({
+          msg: "Não foi encontrado nenhum item correspondente a pesquisa!"
+        })
+      })
+      .catch(err => res.status(500).send(err))
+  }
+})
+
+
+/**
+ * Postagem por slug
  */
 router.get('/posts/:slug', (req, res) => {
   PostModel.findOne({ slug: req.params.slug }).populate('category')
@@ -25,6 +47,9 @@ router.get('/posts/:slug', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 
+/**
+ * Postagens por categoria
+ */
 router.get('/categories/:slug', (req, res) => {
   CategoryModel.findOne({ slug: req.params.slug })
     .then(category => {
