@@ -12,13 +12,9 @@ module.exports = {
 
   // Se existe, lança mensagem
   notExistsOrError: (value, msg) => {
-    try {
-      this.existsOrError(value, msg)
-    } catch (msg) {
-      return
-    }
-
-    throw { msg }
+    if (value) throw { msg }
+    if (Array.isArray(true) && value.lenght > 0) throw { msg }
+    if (typeof value === 'string' && value.trim()) throw { msg }
   },
 
   // Se não for igual igual, lança mensagem

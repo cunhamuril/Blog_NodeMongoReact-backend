@@ -4,6 +4,7 @@ const uploadConfig = require('../config/upload.config')
 
 const CategoryController = require('../controllers/Category.controller')
 const PostController = require('../controllers/Post.controller')
+const UserController = require('../controllers/User.crontroller')
 
 const router = express.Router()
 const upload = multer(uploadConfig)
@@ -26,5 +27,12 @@ router.get('/posts/:id', PostController.findOne)
 router.post('/posts', upload.single('thumbnail'), PostController.save)
 router.patch('/posts/:id', upload.single('thumbnail'), PostController.update)
 router.delete('/posts/:id', PostController.remove)
+
+/**
+ * Rotas de usuários
+ */
+router.post('/users', UserController.save)
+router.put('/users/:id', UserController.update)
+router.delete('/users/:id', UserController.remove)
 
 module.exports = router

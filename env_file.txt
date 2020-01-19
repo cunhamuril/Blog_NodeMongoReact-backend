@@ -1,5 +1,12 @@
 # app
-PORT = 3003
+HOST = "http://192.168.0.103"
+PORT = 3333
 
 # database
 DB_URL = "mongodb+srv://omnistack:omnistack@cluster0-pc8aa.mongodb.net/ExBlog?retryWrites=true&w=majority"
+
+# cors
+CORS_ORIGIN = "http://192.168.0.103:3000"
+
+# BCrypt
+SALT_ROUNDS = 10
