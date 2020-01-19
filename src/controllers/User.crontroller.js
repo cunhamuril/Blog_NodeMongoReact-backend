@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 const UserModel = require('../models/User.model')
 
-const { existsOrError, notExistsOrError, equalsOrError } = require('./validation')
+const { existsOrError, notExistsOrError, equalsOrError } = require('../utils/validation')
 const { SALT_ROUNDS } = process.env
 
 module.exports = {

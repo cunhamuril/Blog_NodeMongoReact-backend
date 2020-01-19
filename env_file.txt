@@ -10,3 +10,6 @@ CORS_ORIGIN = "http://192.168.0.103:3000"
 
 # BCrypt
 SALT_ROUNDS = 10
+
+# JWT
+JWT_KEY = "cunhamuril_development"

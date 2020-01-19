@@ -1,7 +1,7 @@
 require('dotenv/config')
 const express = require('express')
 
-const { existsOrError } = require('../controllers/validation')
+const { existsOrError } = require('../utils/validation')
 const PostModel = require('../models/Post.model')
 const CategoryModel = require('../models/Category.model')
 

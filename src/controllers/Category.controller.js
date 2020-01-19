@@ -1,7 +1,7 @@
 const CategoryModel = require('../models/Category.model')
 const PostModel = require('../models/Post.model')
 
-const { existsOrError, notExistsOrError } = require('./validation')
+const { existsOrError, notExistsOrError } = require('../utils/validation')
 
 module.exports = {
   save: (req, res) => {

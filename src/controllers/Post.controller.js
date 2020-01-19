@@ -1,7 +1,7 @@
 require('dotenv/config')
 const PostModel = require('../models/Post.model')
 
-const { existsOrError } = require('./validation')
+const { existsOrError } = require('../utils/validation')
 
 const { HOST, PORT } = process.env
 
