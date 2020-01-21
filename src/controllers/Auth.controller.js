@@ -17,16 +17,16 @@ module.exports = {
      * gerar token
      */
 
-    const { email, username, password } = req.body
+    const { username, password } = req.body
 
     try {
-      existsOrError((email || username), "Informe um e-mail ou username")
+      existsOrError((username), "Informe um e-mail ou username")
       existsOrError(password, "Informe a senha!")
     } catch (msg) {
       return res.status(400).send(msg)
     }
 
-    UserModel.findOne({ $or: [{ email }, { username }] })
+    UserModel.findOne({ $or: [{ email: username }, { username }] })
       .then(user => {
         // Verificar existencia de usuário
         if (!user) return res.status(400).send({ msg: "Usuário não encontrado!" })
@@ -39,10 +39,10 @@ module.exports = {
             // Gerar token
             const payload = { id: 420 }
             const generatedToken = jwt.sign(payload, JWT_KEY, {
-              expiresIn: "1m"
+              expiresIn: "3d"
             })
 
-            res.send({ token: generatedToken })
+            res.send({ user_id: user._id, token: generatedToken })
           })
       })
       .catch(err => res.status(500).send(err))

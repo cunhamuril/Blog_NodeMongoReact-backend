@@ -36,8 +36,9 @@ router.get('/posts/:id', PostController.findOne)
 /**
  * Rotas de usuários
  */
+router.get('/users/:id', validateToken, UserController.findOne)
 router.post('/users', UserController.save) // não administrativa
-router.put('/users/:id', validateToken, UserController.update)
+router.patch('/users/:id', validateToken, UserController.update)
 router.delete('/users/:id', validateToken, UserController.remove)
 
 // Autenticação
