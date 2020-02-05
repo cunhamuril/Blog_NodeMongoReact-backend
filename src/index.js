@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require('path')
+const morgan = require('morgan')
 
 const adminRoutes = require('./routes/admin.routes')
 const mainRoutes = require('./routes/main.routes')
@@ -13,12 +14,6 @@ const app = express()
 
 const { DB_URL, PORT, CORS_ORIGIN } = process.env
 
-/**
- * Config 
- */
-// Body Parser
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
 
 // Mongoose
 mongoose.Promise = global.Promise
@@ -29,8 +24,18 @@ mongoose.connect(DB_URL, {
   .then(() => console.log("MongoDB connected successfully"))
   .catch(err => console.log("Error on connect MongoDB: " + err))
 
+/**
+ * Config 
+ */
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
 // Cors
 app.use(cors())
+
+// Morgan -> monitorar requisições
+app.use(morgan('dev'))
 
 
 /**
