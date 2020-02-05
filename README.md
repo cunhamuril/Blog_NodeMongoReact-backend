@@ -23,12 +23,12 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 
 # 🔗 REST endpoints
 ## Público
-##### /posts/search?value=<nome da postagem>
+##### /posts/search?value=pesquisa
 - **Função**: Pesquisar postagem pelo nome
 - **Método**: `GET`
 - **Requisição**: Param
 
-##### /categories/<slug-da-categoria>?page=1
+##### /categories/:slug-da-categoria?page=1
 - **Função**: Pesquisar postagens pela categoria, informando a página que por padrão é 1
 - **Método**: `GET`
 - **Requisição**: Param
@@ -45,14 +45,14 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 - **Função**: Listar postagens por página que por padrão é 1
 - **Método**: `GET`
 
-##### /posts/<slug-da-postagem>
+##### /posts/:slug-da-postagem
 - **Função**: Visualizar uma postagem
 - **Método**: `GET`
 
 ## Administração
 - **Header**: `Authorization: Bearer <token>`
 ### Categorias
-##### /admin/categories/<id>
+##### /admin/categories/:id
 - **Função**: Buscar apenas uma categoria
 - **Método**: `GET`
 
@@ -68,7 +68,7 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 }
 ~~~
 
-##### /admin/categories/<id>
+##### /admin/categories/:id
 - **Função**: Editar categoria
 - **Método**: `PUT`
 - **Requisição**: Body
@@ -80,13 +80,13 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 }
 ~~~
 
-##### /admin/categories/<id>
+##### /admin/categories/:id
 - **Função**: Excluir categoria
 - **Método**: `DELETE`
 - **Restrição**: Categoria não poderá ser excluída se tiver uma postagem registrada nela.
 
 ### Postagens
-##### /admin/posts/<id>
+##### /admin/posts/:id
 - **Função**: Buscar apenas uma postagem
 - **Método**: `GET`
 
@@ -104,7 +104,7 @@ category: <id da categoria>
 thumbnail: <arquivo de imagem>
 ~~~
 
-##### /admin/posts/<id>
+##### /admin/posts/:id
 - **Função**: Editar postagem
 - **Método**: `PATCH`
 - **Requisição**: Multipart Form
@@ -118,12 +118,12 @@ category: <id da categoria>
 thumbnail: <arquivo de imagem>
 ~~~
 
-##### /admin/posts/<id>
+##### /admin/posts/:id
 - **Função**: Excluir postagem
 - **Método**: `DELETE`
 
 ### Usuários
-##### /admin/users/<id>
+##### /admin/users/:id
 - **Função**: Buscar apenas um usuário
 - **Método**: `GET`
 
@@ -142,7 +142,7 @@ thumbnail: <arquivo de imagem>
 }
 ~~~
 
-##### /admin/users/<id>
+##### /admin/users/:id
 - **Função**: Editar usuário
 - **Método**: `PATCH`
 - **Requisição**: Body
@@ -157,7 +157,7 @@ thumbnail: <arquivo de imagem>
 }
 ~~~
 
-##### /admin/users/<id>
+##### /admin/users/:id
 - **Função**: Excluir usuário
 - **Método**: `DELETE`
 - **Requisição**: Body
